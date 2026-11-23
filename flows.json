@@ -1,0 +1,669 @@
+[
+    {
+        "id": "tab_braco",
+        "type": "tab",
+        "label": "Braço Robótico - Remoto",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "format_serial",
+        "type": "function",
+        "z": "tab_braco",
+        "name": "Formatar Comando",
+        "func": "// Pega o tópico (B, O, C, P, G) e o valor do slider\nvar comando = msg.topic + \":\" + msg.payload + \"\\n\";\nmsg.payload = comando;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 320,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "debug_serial",
+        "type": "debug",
+        "z": "tab_braco",
+        "name": "Debug Serial",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "a06a09c630ee8a4d",
+        "type": "inject",
+        "z": "tab_braco",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "slider_base"
+            ]
+        ]
+    },
+    {
+        "id": "e9b029d8c62b3c03",
+        "type": "inject",
+        "z": "tab_braco",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "90",
+        "payloadType": "num",
+        "x": 150,
+        "y": 360,
+        "wires": [
+            [
+                "slider_punho"
+            ]
+        ]
+    },
+    {
+        "id": "btn_remoto_on",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_modo",
+        "name": "Ativar Remoto",
+        "label": "REMOTO ON",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "emulateClick": true,
+        "tooltip": "Desabilita os potenciômetros",
+        "color": "green",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa fa-wifi",
+        "iconPosition": "left",
+        "payload": "REMOTO_ON",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 310,
+        "y": 120,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "btn_remoto_off",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_modo",
+        "name": "Ativar Local",
+        "label": "REMOTO OFF",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Devolve controle aos potenciômetros",
+        "color": "red",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa fa-gamepad",
+        "iconPosition": "left",
+        "payload": "REMOTO_OFF",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "btn_gravar",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_acoes",
+        "name": "Gravar",
+        "label": "GRAVAR",
+        "order": 1,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Inicia a gravação de movimentos",
+        "color": "",
+        "bgcolor": "red",
+        "className": "",
+        "icon": "fa fa-circle",
+        "iconPosition": "left",
+        "payload": "GRAVAR",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 300,
+        "y": 480,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "btn_play",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_acoes",
+        "name": "Play",
+        "label": "PLAY",
+        "order": 2,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Reproduz os movimentos",
+        "color": "",
+        "bgcolor": "green",
+        "className": "",
+        "icon": "fa fa-play",
+        "iconPosition": "left",
+        "payload": "PLAY",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "btn_pause",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_acoes",
+        "name": "Pause",
+        "label": "PAUSE / RETOMA",
+        "order": 3,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Congela e retoma de onde parou",
+        "color": "",
+        "bgcolor": "yellow",
+        "className": "",
+        "icon": "fa fa-pause",
+        "iconPosition": "left",
+        "payload": "PAUSE",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 320,
+        "y": 560,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "btn_stop",
+        "type": "ui-button",
+        "z": "tab_braco",
+        "group": "grp_acoes",
+        "name": "Stop",
+        "label": "STOP",
+        "order": 4,
+        "width": "3",
+        "height": "1",
+        "emulateClick": false,
+        "tooltip": "Para tudo e volta ao manual",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "fa fa-stop",
+        "iconPosition": "left",
+        "payload": "STOP",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 290,
+        "y": 600,
+        "wires": [
+            [
+                "serial_out"
+            ]
+        ]
+    },
+    {
+        "id": "slider_base",
+        "type": "ui-slider",
+        "z": "tab_braco",
+        "group": "grp_eixos",
+        "name": "Base",
+        "label": "Base",
+        "tooltip": "Move o eixo Base",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "all",
+        "topic": "B",
+        "topicType": "str",
+        "showTicks": "false",
+        "min": "0",
+        "max": "180",
+        "step": "1",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "format_serial"
+            ]
+        ]
+    },
+    {
+        "id": "slider_ombro",
+        "type": "ui-slider",
+        "z": "tab_braco",
+        "group": "grp_eixos",
+        "name": "Ombro",
+        "label": "Ombro",
+        "tooltip": "Move o eixo Ombro",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "all",
+        "topic": "O",
+        "topicType": "str",
+        "showTicks": "false",
+        "min": "0",
+        "max": "180",
+        "step": "1",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 280,
+        "y": 280,
+        "wires": [
+            [
+                "format_serial"
+            ]
+        ]
+    },
+    {
+        "id": "slider_cotovelo",
+        "type": "ui-slider",
+        "z": "tab_braco",
+        "group": "grp_eixos",
+        "name": "Cotovelo",
+        "label": "Cotovelo",
+        "tooltip": "Move o eixo Cotovelo",
+        "order": 3,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "all",
+        "topic": "C",
+        "topicType": "str",
+        "showTicks": "false",
+        "min": "0",
+        "max": "180",
+        "step": "1",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 290,
+        "y": 320,
+        "wires": [
+            [
+                "format_serial"
+            ]
+        ]
+    },
+    {
+        "id": "slider_punho",
+        "type": "ui-slider",
+        "z": "tab_braco",
+        "group": "grp_eixos",
+        "name": "Punho",
+        "label": "Punho",
+        "tooltip": "Move o eixo Punho",
+        "order": 4,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "all",
+        "topic": "P",
+        "topicType": "str",
+        "showTicks": "false",
+        "min": "0",
+        "max": "180",
+        "step": "1",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "format_serial"
+            ]
+        ]
+    },
+    {
+        "id": "slider_garra",
+        "type": "ui-slider",
+        "z": "tab_braco",
+        "group": "grp_eixos",
+        "name": "Garra",
+        "label": "Garra",
+        "tooltip": "Abre e fecha a garra",
+        "order": 5,
+        "width": "6",
+        "height": "1",
+        "passthru": false,
+        "outs": "all",
+        "topic": "G",
+        "topicType": "str",
+        "showTicks": "false",
+        "min": "90",
+        "max": "150",
+        "step": "60",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "format_serial"
+            ]
+        ]
+    },
+    {
+        "id": "serial_in",
+        "type": "serial in",
+        "z": "tab_braco",
+        "name": "Arduino Serial In",
+        "serial": "serial_port_cfg",
+        "x": 520,
+        "y": 680,
+        "wires": [
+            [
+                "debug_serial"
+            ]
+        ]
+    },
+    {
+        "id": "serial_out",
+        "type": "serial out",
+        "z": "tab_braco",
+        "name": "Arduino Serial Out",
+        "serial": "serial_port_cfg",
+        "x": 770,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "08b6dad433e5f0f7",
+        "type": "inject",
+        "z": "tab_braco",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 150,
+        "y": 280,
+        "wires": [
+            [
+                "slider_ombro"
+            ]
+        ]
+    },
+    {
+        "id": "c9f358e1a4dddfb1",
+        "type": "inject",
+        "z": "tab_braco",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "180",
+        "payloadType": "num",
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "slider_cotovelo"
+            ]
+        ]
+    },
+    {
+        "id": "grp_modo",
+        "type": "ui-group",
+        "name": "Modo de Controle",
+        "page": "page_principal",
+        "width": "6",
+        "height": "1",
+        "order": 1
+    },
+    {
+        "id": "grp_acoes",
+        "type": "ui-group",
+        "name": "Ações de Gravação",
+        "page": "page_principal",
+        "width": "12",
+        "height": "1",
+        "order": 3
+    },
+    {
+        "id": "grp_eixos",
+        "type": "ui-group",
+        "name": "Eixos (Sliders)",
+        "page": "page_principal",
+        "width": "6",
+        "height": "1",
+        "order": 2
+    },
+    {
+        "id": "serial_port_cfg",
+        "type": "serial-port",
+        "name": "Porta Arduino",
+        "serialport": "COM9",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "1000"
+    },
+    {
+        "id": "page_principal",
+        "type": "ui-page",
+        "name": "Controle do Braço",
+        "ui": "ui_base",
+        "path": "/braco",
+        "icon": "dashboard",
+        "layout": "grid",
+        "theme": "default",
+        "order": 1
+    },
+    {
+        "id": "ui_base",
+        "type": "ui-base",
+        "name": "Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-control",
+            "ui-notification"
+        ],
+        "headerContent": "page",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 5,
+        "showDisconnectNotification": true,
+        "allowInstall": true
+    },
+    {
+        "id": "9a9099170155ff3e",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.34.1",
+            "node-red-node-serialport": "2.0.3"
+        }
+    }
+]
